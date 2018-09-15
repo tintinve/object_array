@@ -57,6 +57,7 @@ nav {
   top: 50px;
   right: 0px;
   padding: 7px 15px 5px 10px;
+  z-index: 1;
 }
 .hidden {
   display: none;
@@ -78,4 +79,13 @@ a:hover {
 }
 a:active {
   text-decoration: none;
+}
+
+table {
+  background-color: #302d34;
+  border: none;
+  width: 100%;
+}
+.fader {
+  opacity: 0.2;
 }

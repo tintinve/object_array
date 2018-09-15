@@ -33,6 +33,7 @@ function loadFrontEnd() {
 function menuIcon(x) {
   x.classList.toggle("change");
   document.querySelector("nav").classList.toggle("hidden");
+  document.querySelector("table").classList.toggle("fader");
 }
 
 function fetchData() {
@@ -266,7 +267,6 @@ function clickedFilter(event) {
 
   // if filter === all, let the list be all students
   if (filter === "all") {
-    resetMenu();
     currentStudents = allStudents;
     displayList(currentStudents);
   } else {
@@ -302,4 +302,5 @@ function displayList(listOfStudents) {
 function resetMenu() {
   document.querySelector("nav").classList.add("hidden");
   document.querySelector(".container").classList.toggle("change");
+  document.querySelector("table").classList.remove("fader");
 }
