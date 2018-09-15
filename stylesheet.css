@@ -1,0 +1,81 @@
+@font-face {
+  font-family: code;
+  src: url(code.ttf);
+}
+* {
+  box-sizing: border-box;
+  margin: 0px;
+}
+body {
+  font-family: code;
+  color: #00b1ff;
+  position: relative;
+  background-color: #1e1b22;
+}
+header {
+  background-color: #177ba0;
+  height: 50px;
+  margin: 0px 0px 0px 0px;
+  padding: 0px;
+}
+/*START: Menu bar, from W3*/
+.container {
+  display: inline-block;
+  cursor: pointer;
+  z-index: 14;
+  padding: 5px 9px 0px 0px;
+  float: right;
+}
+
+.bar1,
+.bar2,
+.bar3 {
+  width: 35px;
+  height: 5px;
+  background-color: #333;
+  margin: 6px 0;
+  transition: 0.4s;
+}
+
+.change .bar1 {
+  transform: rotate(-45deg) translate(-9px, 6px);
+}
+
+.change .bar2 {
+  opacity: 0;
+}
+
+.change .bar3 {
+  transform: rotate(45deg) translate(-8px, -8px);
+}
+/*End: Menu bar, from W3*/
+nav {
+  background-color: #1e1b22;
+  width: 160px;
+  height: auto;
+  position: fixed;
+  top: 50px;
+  right: 0px;
+  padding: 7px 15px 5px 10px;
+}
+.hidden {
+  display: none;
+}
+#filters {
+  background-color: #1e1b22;
+}
+/*Fix y poner todos estos links en dentro de un solo selector*/
+
+a:link {
+  text-decoration: none;
+  color: #00b1ff;
+}
+a:visited {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}
+a:active {
+  text-decoration: none;
+}
