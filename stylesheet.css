@@ -65,6 +65,11 @@ nav {
 }
 #filters {
   background-color: #1e1b22;
+  display: inline;
+}
+#filters a {
+  width: 100%;
+  display: inline-block;
 }
 /*Fix y poner todos estos links en dentro de un solo selector*/
 

@@ -1,15 +1,12 @@
 "use strict";
 
 window.addEventListener("DOMContentLoaded", init);
-
 const allStudents = [];
 let currentStudents = [];
-
 function init() {
   allStudents.splice(0, allStudents.length);
   loadFrontEnd();
 }
-
 function loadFrontEnd() {
   document
     .querySelector("#sort_first")
@@ -23,8 +20,6 @@ function loadFrontEnd() {
   document
     .querySelectorAll("#filters a")
     .forEach(element => element.addEventListener("click", clickedFilter));
-
-  // register table clicks
   document
     .querySelector("table#studentlist")
     .addEventListener("click", clickedTable);
@@ -35,7 +30,6 @@ function menuIcon(x) {
   document.querySelector("nav").classList.toggle("hidden");
   document.querySelector("table").classList.toggle("fader");
 }
-
 function fetchData() {
   fetch("http://petlatkea.dk/2018/classlist1991/students.json")
     .then(function(response) {
@@ -73,10 +67,7 @@ function buildList(jsondata) {
     function createStudent(fullName) {
       const student = Object.create(Student_prototype);
       student.splitName(fullName);
-      //student.setHouse(house);
       student.house = house;
-
-      // assign this student a unique id
       student.id = generateUUID();
       allStudents.push(student);
     }
@@ -99,14 +90,9 @@ function generateUUID() {
     return (c === "x" ? r : (r & 0x3) | 0x8).toString(16);
   });
 }
-
 function deleteStudent(studentId) {
-  // find the index of the student with studentId
   const index = allStudents.findIndex(findStudent);
-  console.log("found index: " + index);
   allStudents.splice(index, 1);
-
-  // function that returns true when student.id == studentId
   function findStudent(student) {
     if (student.id === studentId) {
       return true;
@@ -115,7 +101,6 @@ function deleteStudent(studentId) {
     }
   }
 }
-
 function sortByFirstName() {
   currentStudents.sort(byFirstName);
   function byFirstName(a, b) {
@@ -129,7 +114,6 @@ function sortByFirstName() {
   }
   resetMenu();
 }
-
 function sortByLastName() {
   currentStudents.sort(byLastName);
   function byLastName(a, b) {
@@ -141,11 +125,9 @@ function sortByLastName() {
   }
   resetMenu();
 }
-
 function sortByHouse() {
   currentStudents.sort(byHouseAndFirstName);
   function byHouseAndFirstName(a, b) {
-    // first sort by house, but if house is the same, sort by first name
     if (a.house < b.house) {
       return -1;
     } else if (a.house > b.house) {
@@ -160,7 +142,6 @@ function sortByHouse() {
   }
   resetMenu();
 }
-
 function filterByHouse(house) {
   resetMenu();
   const filteredStudents = allStudents.filter(byHouse);
@@ -173,13 +154,11 @@ function filterByHouse(house) {
   }
   return filteredStudents;
 }
-
 function listOfStudents() {
   let str = "";
   allStudents.forEach(student => (str += student + "\n"));
   return str;
 }
-
 function clickedTable(event) {
   const clicked = event.target;
   if (clicked.tagName.toLowerCase() === "button") {
@@ -188,11 +167,7 @@ function clickedTable(event) {
     showModal(clicked);
   }
 }
-
 function clickedDelete(deleteButton) {
-  console.log(deleteButton);
-  //    console.log(deleteButton);
-  // find the parent <tr> that has this deleteButton inside it
   let tr = deleteButton.parentElement;
   while (tr.tagName !== "TR") {
     tr = tr.parentElement;
@@ -204,7 +179,6 @@ function clickedDelete(deleteButton) {
 function showModal(event) {
   document.querySelector("#modal").style.display = "block";
   document.querySelector("table").classList.toggle("fader");
-  console.log(event);
   document.querySelector(".closeModal").addEventListener("click", closeModal);
   document.querySelector("#modal").addEventListener("click", closeModal);
 }
@@ -216,26 +190,19 @@ function animateDelete(tr) {
   tr.style.transform = "translateX(-105%)";
   tr.style.transition = "transform 1s";
 
-  // tr.classList.add("fly-out");
   const rect = tr.getBoundingClientRect();
 
   tr.addEventListener("transitionend", function() {
-    // find the nextSibling (the tr below this)
     let nextSibling = tr.nextElementSibling;
 
     if (nextSibling !== null) {
       nextSibling.addEventListener("transitionend", function() {
-        console.log("transition end");
-
-        // reset all the translateY!
         let nextTr = tr.nextElementSibling;
         while (nextTr !== null) {
           nextTr.style.transform = "translateY(0)";
           nextTr.style.transition = "transform 0s";
           nextTr = nextTr.nextElementSibling;
         }
-
-        // remove that <tr>
         tr.remove();
       });
 
@@ -245,37 +212,25 @@ function animateDelete(tr) {
         nextSibling = nextSibling.nextElementSibling;
       }
     } else {
-      // no next sibling - just remove!
       tr.remove();
     }
   });
 }
-
 function clickedSortFirstname() {
-  console.log("clickedSortFirstname");
   sortByFirstName();
   displayList(currentStudents);
 }
-
 function clickedSortLastname() {
-  console.log("clickedSortLastname");
   sortByLastName();
   displayList(currentStudents);
 }
-
 function clickedSortHouse() {
-  console.log("clickedSortHouse");
   sortByHouse();
   displayList(currentStudents);
 }
-
 function clickedFilter(event) {
-  const filter = this.dataset.filter; // references data-filter="____"
+  const filter = this.dataset.filter;
   event.preventDefault();
-
-  // create a list of filtered students by house
-
-  // if filter === all, let the list be all students
   if (filter === "all") {
     currentStudents = allStudents;
     displayList(currentStudents);
@@ -284,28 +239,17 @@ function clickedFilter(event) {
     displayList(currentStudents);
   }
 }
-
 function displayList(listOfStudents) {
   console.log("Display list");
-  // clear the table
   document.querySelector("table#studentlist tbody").innerHTML = "";
-
-  // foreach student in listOfStudents
   listOfStudents.forEach(function(student) {
-    // clone a table-row for student
     const clone = document
       .querySelector("#student_template")
       .content.cloneNode(true);
-
-    // fill in the clone with data
     clone.querySelector("[data-firstname]").textContent = student.firstName;
     clone.querySelector("[data-lastname]").textContent = student.lastName;
     clone.querySelector("[data-house]").textContent = student.house;
-
-    // add the studentId to the <tr>
     clone.querySelector("tr").dataset.studentId = student.id;
-
-    // append clone to table
     document.querySelector("table#studentlist tbody").appendChild(clone);
   });
 }
