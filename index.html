@@ -18,14 +18,16 @@
             <div class="bar3"></div>
         </div>
     </header>
-
+    <div id="modal">
+        <p class="closeModal">x</p>
+        <p>----Details---</p>
+    </div>
     <nav id="buttons" class="hidden">
         <div id="sorting">
             Sort by:
             <div id="sort_first">First name</div>
             <div id="sort_last">Last name</div>
             <div id="sort_house">House</div>
-
         </div>
         <div id="filters">
             Filter:<br />
@@ -34,18 +36,11 @@
             <a href="#" data-filter="Hufflepuff">Hufflepuff</a>
             <a href="#" data-filter="Ravenclaw">Ravenclaw</a>
             <a href="#" data-filter="Slytherin">Slytherin</a>
-
         </div>
     </nav>
-    <table id="studentlist">
-        <tbody>
-            <tr>
-                <td>Harry</td>
-                <td>Potter</td>
-                <td>Gryffindor</td>
-                <td><button>Delete</button></td>
-            </tr>
-        </tbody>
+
+    <table id="studentlist" cellspacing="0" cellpadding="0">
+        <tbody></tbody>
     </table>
     <template id="student_template">
         <tr>

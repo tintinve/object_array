@@ -66,7 +66,6 @@ const Student_prototype = {
 function buildList(jsondata) {
   Object.keys(jsondata).forEach(house => {
     const houseStudentNames = jsondata[house];
-    console.log(houseStudentNames);
     fillHouseWithStudents(house, houseStudentNames);
   });
   function fillHouseWithStudents(house, studentNames) {
@@ -185,10 +184,13 @@ function clickedTable(event) {
   const clicked = event.target;
   if (clicked.tagName.toLowerCase() === "button") {
     clickedDelete(clicked);
+  } else {
+    showModal(clicked);
   }
 }
 
 function clickedDelete(deleteButton) {
+  console.log(deleteButton);
   //    console.log(deleteButton);
   // find the parent <tr> that has this deleteButton inside it
   let tr = deleteButton.parentElement;
@@ -199,7 +201,15 @@ function clickedDelete(deleteButton) {
   deleteStudent(studentId);
   animateDelete(tr);
 }
-
+function showModal(clicked) {
+  document.querySelector("#modal").style.display = "block";
+  document.querySelector("table").classList.toggle("fader");
+  document.querySelector(".closeModal").addEventListener("click", closeModal);
+}
+function closeModal(clicked) {
+  document.querySelector("#modal").style.display = "none";
+  document.querySelector("table").classList.remove("fader");
+}
 function animateDelete(tr) {
   tr.style.transform = "translateX(-105%)";
   tr.style.transition = "transform 1s";
@@ -220,7 +230,6 @@ function animateDelete(tr) {
         while (nextTr !== null) {
           nextTr.style.transform = "translateY(0)";
           nextTr.style.transition = "transform 0s";
-
           nextTr = nextTr.nextElementSibling;
         }
 
@@ -231,7 +240,6 @@ function animateDelete(tr) {
       while (nextSibling !== null) {
         nextSibling.style.transform = "translateY(-" + rect.height + "px)";
         nextSibling.style.transition = "transform 0.5s";
-
         nextSibling = nextSibling.nextElementSibling;
       }
     } else {
