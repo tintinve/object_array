@@ -82,12 +82,12 @@ a:active {
   text-decoration: none;
 }
 #modal {
-  width: 90%;
-  height: 180px;
+  width: 98%;
+  height: 91vh;
   background-color: #38323f;
   position: fixed;
-  left: 5%;
-  top: 7%;
+  left: 1%;
+  top: 6.3%;
   z-index: 1;
   display: none;
 }
@@ -101,14 +101,23 @@ table {
   border: none;
   width: 100%;
 }
-.padder {
-  background-color: red;
-  margin: 4px;
+.deleteButton {
+  background-color: #38323f; /* Green */
+  width: 100px;
+  float: right;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
 }
 td {
   height: 40px;
   text-align: left;
   border-bottom: 2px solid #1e1b22;
+  padding-left: 10px;
 }
 .fader {
   opacity: 0.2;

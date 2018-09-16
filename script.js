@@ -201,10 +201,12 @@ function clickedDelete(deleteButton) {
   deleteStudent(studentId);
   animateDelete(tr);
 }
-function showModal(clicked) {
+function showModal(event) {
   document.querySelector("#modal").style.display = "block";
   document.querySelector("table").classList.toggle("fader");
+  console.log(event);
   document.querySelector(".closeModal").addEventListener("click", closeModal);
+  document.querySelector("#modal").addEventListener("click", closeModal);
 }
 function closeModal(clicked) {
   document.querySelector("#modal").style.display = "none";
